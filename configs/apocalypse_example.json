@@ -1,0 +1,259 @@
+{
+  "project": {
+    "title": "锈色黎明",
+    "subtitle": "末日生存短片 · 废土",
+    "type": "short_film",
+    "logline": "灾变十年后，一名拾荒者和被他捡到的女孩在一座死城里找最后一口干净的水，他们约定天亮前离开。",
+    "duration_target_sec": 40,
+    "aspect_ratio": "16:9",
+    "resolution": "1920x1080",
+    "fps": 24,
+    "language": "zh-CN",
+    "act_structure": [
+      { "act": "第一幕·死城", "shots": ["S001", "S002"], "emotion_curve": "寂→疑" },
+      { "act": "第二幕·水", "shots": ["S003", "S004", "S005"], "emotion_curve": "疑→暖" },
+      { "act": "第三幕·黎明", "shots": ["S006"], "emotion_curve": "暖→决" }
+    ]
+  },
+
+  "style_bible": {
+    "art_style": "末日废土写实：低饱和冷灰蓝底 + 锈蚀橙与辐射绿荧光点缀，逆光尘霾，decay 质感，手持纪实",
+    "reference_direction": "参考《疯狂的麦克斯》《我是传奇》的废土美术，重生存的真实粗粝感，不猎奇血腥",
+    "palette": [
+      { "hex": "#4A4F57", "name": "锈灰蓝", "usage": "主调，天空、废墟、金属" },
+      { "hex": "#7A5A3A", "name": "锈蚀橙", "usage": "废弃装备、夕照、点缀" },
+      { "hex": "#6FAE7A", "name": "辐射绿", "usage": "感染/荧光点缀，max_coverage: 0.08" },
+      { "hex": "#B5562E", "name": "末日曙红", "usage": "黎明天光，max_coverage: 0.1" }
+    ],
+    "lighting": "黄昏长影、穿透烟尘的光柱，无干净日光",
+    "camera_language": "手持纪实、喘息感晃镜、废墟窥视构图",
+    "lens": "35mm 等效为主，特写 85mm",
+    "texture": "锈蚀、开裂、苔癣覆盖、尘霾，避免平滑塑料感",
+    "motion_intensity": "中低：动作镜头可稍快，但单镜位移不超过画面 12%",
+    "negative_prompt": "明亮棚光, 干净街道, 现代广告, 塑料质感, 过度美颜, 平滑皮肤, 霓虹, 多余手指, 五官错位, 文字水印, 血腥特写, 浪漫化暴力",
+    "consistency_requirements": {
+      "character_anchor_required": true,
+      "style_prefix_required": true,
+      "seed_lock_scope": "per_character"
+    }
+  },
+
+  "characters": [
+    {
+      "id": "C01",
+      "name": "阿岩",
+      "role": "主角·拾荒者",
+      "age_look": "三十余",
+      "appearance_anchors": {
+        "hair": "寸头，蒙灰头巾",
+        "face": "晒黑，眉骨一道旧划痕",
+        "clothing": "战术背心外罩防毒面具挂颈，捡来的护膝",
+        "signature_prop": "一只自制滤水壶",
+        "forbidden": "不得出现鲜艳色彩、干净新衣"
+      },
+      "consistency": {
+        "seed": 482001,
+        "reference_image": "03_character/C01_ref.png",
+        "lora_path": "03_character/loras/ayan_v1.safetensors",
+        "lora_weight": 0.78,
+        "ip_adapter_weight": 0.65,
+        "lock_appearance": true
+      },
+      "voice": {
+        "tts_voice": "zh-CN-YunyangNeural",
+        "rate": "-4%",
+        "pitch": "-3Hz",
+        "persona": "沙哑、惜字、压低"
+      }
+    },
+    {
+      "id": "C02",
+      "name": "小满",
+      "role": "被捡到的女孩",
+      "age_look": "十岁许",
+      "appearance_anchors": {
+        "hair": "乱短发，戴一只过滤口罩",
+        "face": "瘦，眼大",
+        "clothing": "过大的成人外套改短，脏",
+        "signature_prop": "半截绳子牵着的空瓶",
+        "forbidden": "不得出现鲜艳服饰、干净脸"
+      },
+      "consistency": {
+        "seed": 482002,
+        "reference_image": "03_character/C02_ref.png",
+        "lora_path": "03_character/loras/xiaoman_v1.safetensors",
+        "lora_weight": 0.78,
+        "ip_adapter_weight": 0.65,
+        "lock_appearance": true
+      },
+      "voice": {
+        "tts_voice": "zh-CN-XiaoyiNeural",
+        "rate": "0%",
+        "pitch": "+3Hz",
+        "persona": "细、怯、但执着"
+      }
+    }
+  ],
+
+  "shots": [
+    {
+      "id": "S001",
+      "act": "第一幕·死城",
+      "scene": "废墟城市·黄昏",
+      "duration_sec": 7.0,
+      "shot_size": "大远景",
+      "camera_move": "极缓横移",
+      "description": "半塌的高楼骨架在尘霾里排成死去的森林，远处一道末日曙红。一个人影在街心翻找。",
+      "characters": ["C01"],
+      "image_prompt": "末日废土写实，大远景，尘霾中的半塌高楼骨架如枯林，远处一线末日曙红天光，街心一个蒙头巾的拾荒者剪影翻找废墟，锈灰蓝主调，逆光尘霾，decay 质感，无面部特写",
+      "video_prompt": "镜头极缓横移，尘粒在光柱中漂浮，人影缓慢翻动瓦砾，画面稳定无抽搐",
+      "dialogue": [],
+      "sfx": ["风穿废墟声", "远处金属轻响"],
+      "bgm": "低频 drone 长音，音量 -24dB",
+      "transition_out": "fade"
+    },
+    {
+      "id": "S002",
+      "act": "第一幕·死城",
+      "scene": "街心·中景",
+      "duration_sec": 6.0,
+      "shot_size": "中景",
+      "camera_move": "手持微晃",
+      "description": "阿岩从碎玻璃下捡出一截绳子牵着的空瓶——瓶口有人用蜡封过。他抬头，看见角落里的女孩。",
+      "characters": ["C01", "C02"],
+      "image_prompt": "末日废土写实，中景，拾荒者跪于街心碎玻璃旁手持蜡封空瓶，角落一个戴过滤口罩的瘦小女孩望着他，战术背心与改短外套，锈灰蓝与尘霾，手持纪实构图",
+      "video_prompt": "手持微晃，人物轻微动作翻找，瓶身微光反射，女孩眼珠缓慢转动，画面无换脸无闪烁",
+      "dialogue": [
+        { "character": "C01", "text": "你在这儿多久了？", "start_sec": 2.5, "emotion": "压低，意外" }
+      ],
+      "sfx": ["碎玻璃轻响", "风声"],
+      "bgm": "drone 延续",
+      "transition_out": "cut"
+    },
+    {
+      "id": "S003",
+      "act": "第二幕·水",
+      "scene": "滤水壶·特写",
+      "duration_sec": 5.0,
+      "shot_size": "特写",
+      "camera_move": "固定",
+      "description": "自制滤水壶里只剩浅浅一层浑水。光从壶壁透出一点锈橙。",
+      "characters": ["C01"],
+      "image_prompt": "末日废土写实，特写，一只自制滤水壶内仅余浅层浑水，壶壁透出锈蚀橙微光，金属与布滤层纹理粗糙，尘霾背景虚化",
+      "video_prompt": "固定机位，水面极轻轻晃，光在壶壁缓慢游移，无画面抖动",
+      "dialogue": [],
+      "sfx": ["水声极轻", "呼吸声"],
+      "bgm": "drone 渐弱",
+      "transition_out": "dissolve"
+    },
+    {
+      "id": "S004",
+      "act": "第二幕·水",
+      "scene": "墙根·双人",
+      "duration_sec": 8.0,
+      "shot_size": "中景",
+      "camera_move": "缓慢上升",
+      "description": "阿岩把壶里的水倒一半进女孩的瓶。两人蹲在墙根，谁都没说谢。",
+      "characters": ["C01", "C02"],
+      "image_prompt": "末日废土写实，中景双人，拾荒者与女孩蹲于崩裂墙根，前者将浑水倒入后者瓶中，战术背心与改短外套，锈灰蓝与尘霾，疏离温暖构图",
+      "video_prompt": "镜头缓升，二人轻微动作，水注入瓶中泛起微浑，尘粒飘过，相对位置稳定无换脸",
+      "dialogue": [
+        { "character": "C02", "text": "天亮，我们就走？", "start_sec": 2.0, "emotion": "细，试探" }
+      ],
+      "sfx": ["水声", "风声"],
+      "bgm": "加入极轻钢琴单音",
+      "transition_out": "cut"
+    },
+    {
+      "id": "S005",
+      "act": "第二幕·水",
+      "scene": "女孩脸·大特写",
+      "duration_sec": 5.0,
+      "shot_size": "大特写",
+      "camera_move": "固定",
+      "description": "小满隔着口罩笑了一下，眼睛里有反射的曙红。",
+      "characters": ["C02"],
+      "image_prompt": "末日废土写实，大特写，戴过滤口罩的瘦女孩隔罩笑，眼大，瞳孔反射一线末日曙红，脏污脸质感真实不美颜，背景虚化锈灰",
+      "video_prompt": "固定机位，仅眼珠微动与口罩下嘴角轻扬，反射光缓慢移动，画面极稳无闪烁无面部形变",
+      "dialogue": [
+        { "character": "C02", "text": "嗯。天亮就走。", "start_sec": 1.0, "emotion": "轻，但定了" }
+      ],
+      "sfx": ["风声放大", "远处金属响"],
+      "bgm": "钢琴单音延续，音量 -20dB",
+      "transition_out": "dissolve"
+    },
+    {
+      "id": "S006",
+      "act": "第三幕·黎明",
+      "scene": "城缘·全景",
+      "duration_sec": 9.0,
+      "shot_size": "全景",
+      "camera_move": "后拉远离",
+      "description": "一线曙红爬上废墟边缘。两个身影并肩走向城外。镜头后拉，死城沉回尘霾。",
+      "characters": ["C01", "C02"],
+      "image_prompt": "末日废土写实，全景，黎明一线曙红爬上废墟边缘，两个蒙头巾与戴罩的身影并肩走向城外，锈灰蓝与尘霾，萧索而带一丝暖意，decay 质感",
+      "video_prompt": "镜头缓慢后拉远离，曙红渐亮又渐被尘霾吞回，二人步伐缓慢坚定，雾气自画面两侧涌入遮蔽城市，由清晰转朦胧",
+      "dialogue": [],
+      "sfx": ["风声渐强", "远处闷响"],
+      "bgm": "主题长音渐弱至 -26dB",
+      "transition_out": "fade_to_black",
+      "post_overlay": {
+        "type": "title_card",
+        "text": "锈色黎明",
+        "subtext": "末日生存短片",
+        "font": "assets/fonts/SourceHanSerifSC-Heavy.otf",
+        "start_sec": 7.0,
+        "duration_sec": 2.0
+      }
+    }
+  ],
+
+  "audio": {
+    "voiceover": {
+      "engine": "edge-tts",
+      "note": "升级路径：voice-clone-tts 为角色建声纹（小满可用更高童声克隆）；lip-sync-talkinghead 让角色开口",
+      "output_dir": "05_audio/voice",
+      "format": "mp3",
+      "sample_rate": 24000,
+      "loudness_target_lufs": -16
+    },
+    "bgm": {
+      "file": "05_audio/bgm/apocalypse_drone.mp3",
+      "license": "已授权曲库 / 自有版权 / AI 可商用生成，禁止商业歌曲",
+      "base_volume_db": -22,
+      "ducking_db": "-8",
+      "ducking_on_dialogue": true
+    },
+    "sfx_dir": "05_audio/sfx",
+    "master": { "loudness_target_lufs": "-14", "true_peak_db": "-1.0" }
+  },
+
+  "subtitle": {
+    "enabled": true,
+    "style": {
+      "font_name": "Noto Sans CJK SC",
+      "font_candidates": ["Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", "SimHei", "PingFang SC", "WenQuanYi Zen Hei"],
+      "font_size": 26, "primary_color": "FFFFFF", "outline_color": "1B2A33", "outline_width": 2, "shadow": 1, "margin_v": 48, "alignment": 2
+    },
+    "max_chars_per_line": 16, "max_lines": 2, "min_duration_sec": 1.0
+  },
+
+  "output": {
+    "dir": "06_final",
+    "filename": "apocalypse_xiuse_liming_v1.mp4",
+    "codec": "libx264", "crf": 18, "preset": "slow", "pix_fmt": "yuv420p",
+    "audio_codec": "aac", "audio_bitrate": "192k", "movflags": "+faststart"
+  },
+
+  "compliance": {
+    "checklist": [
+      "暴力/血腥按目标平台分级处理，无直接血腥特写（避免下架）",
+      "不宣扬反社会/极端生存主义；本片为生存与人性叙事，非猎奇",
+      "疫情/感染题材未影射现实疫情与地域，注明虚构",
+      "所有生成素材平台条款已核对（商用权限）",
+      "BGM 为已授权曲库或自有版权 / AI 可商用生成",
+      "配音为平台音色或已获授权的声音克隆",
+      "台词无错别字、无事实性错误（已逐句校对）"
+    ]
+  }
+}
