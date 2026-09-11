@@ -1,0 +1,319 @@
+{
+  "project": {
+    "title": "青竹渡",
+    "subtitle": "水墨仙侠短片",
+    "type": "short_film",
+    "logline": "摆渡人沈砚在忘川渡口送一位不肯过江的姑娘，最后发现自己也是渡不过去的那个人。",
+    "duration_target_sec": 60,
+    "aspect_ratio": "16:9",
+    "resolution": "1920x1080",
+    "fps": 24,
+    "language": "zh-CN",
+    "act_structure": [
+      { "act": "第一幕·渡口", "shots": ["S001", "S002", "S003"], "emotion_curve": "静→疑" },
+      { "act": "第二幕·竹伞", "shots": ["S004", "S005", "S006"], "emotion_curve": "疑→动" },
+      { "act": "第三幕·归渡", "shots": ["S007", "S008"], "emotion_curve": "动→寂" }
+    ]
+  },
+
+  "style_bible": {
+    "art_style": "新国风水墨与赛璐璐混合：墨色晕染的远景 + 干净硬边的角色近景",
+    "reference_direction": "水墨留白 + 工笔人物，参考流派而非具体作品",
+    "palette": [
+      { "hex": "#1B2A33", "name": "墨青", "usage": "主色调，远山、江水、夜色" },
+      { "hex": "#F5F1E8", "name": "宣纸白", "usage": "留白、雾、天光" },
+      { "hex": "#C9A961", "name": "鎏金", "usage": "灯火、法器、高光点缀" },
+      { "hex": "#8C2F2F", "name": "朱砂", "usage": "伞面、衣带、情绪强调", "max_coverage": 0.15 }
+    ],
+    "lighting": "低照度水墨光，主光为月白散射光，逆光轮廓线勾勒人物",
+    "camera_language": "克制运镜，以缓慢推移与固定机位为主，情绪高点才用急推",
+    "lens": "35mm 等效为主，特写用 85mm 等效压缩空间",
+    "texture": "宣纸纹理叠加，轻微颗粒感，避免过度锐化",
+    "motion_intensity": "低：每秒位移不超过画面宽度 8%，避免 AI 视频常见抽搐",
+    "negative_prompt": "真人写实皮肤, 欧美3D渲染, 塑料质感, 多余手指, 五官错位, 文字水印, 低分辨率, 闪烁, 画面抖动, 变形肢体, 现代服饰, 现代建筑, 车辆, 电线",
+    "consistency_requirements": {
+      "character_anchor_required": true,
+      "style_prefix_required": true,
+      "seed_lock_scope": "per_character"
+    }
+  },
+
+  "characters": [
+    {
+      "id": "C01",
+      "name": "沈砚",
+      "role": "主角·摆渡人",
+      "age_look": "二十许",
+      "appearance_anchors": {
+        "hair": "墨色长发，半束，一支素竹簪",
+        "face": "清瘦，眼尾微垂，左眉有一道浅疤",
+        "clothing": "靛青粗布短褐，外罩灰白蓑衣，腰间挂旧竹牌",
+        "signature_prop": "一柄磨得发亮的竹篙",
+        "forbidden": "不得出现金饰、华丽纹样、铠甲"
+      },
+      "consistency": {
+        "seed": 480731,
+        "reference_image": "03_character/C01_ref.png",
+        "lora_path": "03_character/loras/shenyan_v1.safetensors",
+        "lora_weight": 0.75,
+        "ip_adapter_weight": 0.6,
+        "lock_appearance": true
+      },
+      "voice": {
+        "tts_voice": "zh-CN-YunxiNeural",
+        "rate": "-5%",
+        "pitch": "-2Hz",
+        "persona": "清冷、话少、尾音下沉"
+      }
+    },
+    {
+      "id": "C02",
+      "name": "阿箬",
+      "role": "渡客·不肯过江的姑娘",
+      "age_look": "十七八",
+      "appearance_anchors": {
+        "hair": "双环髻，垂两条朱砂色发带",
+        "face": "圆润，眼下有一颗小痣，眼睛偏大",
+        "clothing": "月白襦裙，袖口绣半枝未完成的竹",
+        "signature_prop": "一柄断了三根伞骨的朱砂油纸伞",
+        "forbidden": "不得出现发簪以外的头饰、不得换伞色"
+      },
+      "consistency": {
+        "seed": 480732,
+        "reference_image": "03_character/C02_ref.png",
+        "lora_path": "03_character/loras/aruo_v1.safetensors",
+        "lora_weight": 0.75,
+        "ip_adapter_weight": 0.6,
+        "lock_appearance": true
+      },
+      "voice": {
+        "tts_voice": "zh-CN-XiaoyiNeural",
+        "rate": "+2%",
+        "pitch": "+4Hz",
+        "persona": "轻软、带一点南方口音的顿挫"
+      }
+    }
+  ],
+
+  "shots": [
+    {
+      "id": "S001",
+      "act": "第一幕·渡口",
+      "scene": "忘川渡口·黄昏",
+      "duration_sec": 7.0,
+      "shot_size": "大远景",
+      "camera_move": "极缓横移",
+      "description": "水墨远山连绵，江面平如宣纸，一叶乌篷渡船静泊，船头立着撑篙的人影。整幅画面留白六成。",
+      "characters": [],
+      "image_prompt": "新国风水墨画，大远景，黄昏江渡，连绵远山以淡墨晕染，江面留白占画面六成，一叶乌篷小船停泊在画面右下三分之一处，船头立一撑篙人影漆黑剪影，宣纸纹理，墨青与宣纸白为主色调，极简构图，无人脸特写",
+      "video_prompt": "镜头极缓向右横移，江面微波轻漾，雾气缓慢飘动，人影衣角轻微摆动，全程无镜头抖动，光线保持稳定",
+      "dialogue": [],
+      "sfx": ["远江水流声", "竹篙入水声（极轻）"],
+      "bgm": "古琴单音淡入，音量 -22dB",
+      "transition_out": "fade"
+    },
+    {
+      "id": "S002",
+      "act": "第一幕·渡口",
+      "scene": "渡口·石阶",
+      "duration_sec": 6.0,
+      "shot_size": "中景",
+      "camera_move": "固定",
+      "description": "阿箬站在石阶最上一级，朱砂油纸伞半收，裙摆被江风吹起。她望着对岸，身后是渐暗的天色。",
+      "characters": ["C02"],
+      "image_prompt": "新国风水墨工笔，中景，少女立于江边石阶顶端，月白襦裙，双环髻垂朱砂发带，手中朱砂色油纸伞半收，裙摆被风吹起，背对镜头侧脸可见，眼下一颗小痣，大面积留白与淡墨远山，宣纸纹理",
+      "video_prompt": "固定机位，裙摆与发带缓慢飘动，伞面轻微颤动，江面雾气缓缓漫过石阶，无镜头移动，无人物大幅动作",
+      "dialogue": [
+        { "character": "C02", "text": "我不渡。", "start_sec": 2.5, "emotion": "平静但倔强" }
+      ],
+      "sfx": ["风声", "衣物摩擦声"],
+      "bgm": "古琴延续，加入极轻的箫声",
+      "transition_out": "dissolve"
+    },
+    {
+      "id": "S003",
+      "act": "第一幕·渡口",
+      "scene": "船头·近景",
+      "duration_sec": 5.0,
+      "shot_size": "近景",
+      "camera_move": "缓慢推进",
+      "description": "沈砚在船头停住竹篙，微微偏头。镜头缓慢推进，他的侧脸被江面反光勾出轮廓。",
+      "characters": ["C01"],
+      "image_prompt": "新国风水墨工笔，近景，青年男子侧脸，墨色长发半束素竹簪，靛青短褐外罩灰白蓑衣，左眉一道浅疤，眼尾微垂，手中竹篙斜撑，江面反光勾勒轮廓线，背景淡墨留白，宣纸纹理",
+      "video_prompt": "镜头极缓推进，人物几乎静止仅眼睫轻眨，手中竹篙微微下沉，江面反光缓慢流动，无面部形变，保持五官稳定",
+      "dialogue": [
+        { "character": "C01", "text": "为何？", "start_sec": 1.5, "emotion": "平淡，不带情绪" }
+      ],
+      "sfx": ["竹篙轻点船板声", "水声"],
+      "bgm": "箫声停，只剩古琴",
+      "transition_out": "cut"
+    },
+    {
+      "id": "S004",
+      "act": "第二幕·竹伞",
+      "scene": "石阶·伞下特写",
+      "duration_sec": 8.0,
+      "shot_size": "特写",
+      "camera_move": "固定微晃",
+      "description": "断骨的朱砂油纸伞被撑开一角，伞骨断裂处露出竹篾。雨丝开始落下，在伞面上打出细密水痕。",
+      "characters": ["C02"],
+      "image_prompt": "新国风水墨工笔，特写，朱砂色油纸伞局部，断掉三根伞骨露出竹篾断面，伞面撑开一角，雨丝落下在伞面形成细密水痕，背景虚化为淡墨，朱砂红与墨青对比，宣纸纹理与雨痕肌理",
+      "video_prompt": "固定机位轻微呼吸感晃动，雨丝持续落下，伞面水痕缓慢汇聚成滴滑落，伞骨断口保持形态稳定不形变",
+      "dialogue": [
+        { "character": "C02", "text": "伞断了三根骨，撑不起来了。", "start_sec": 1.0, "emotion": "轻声，像在说别的" }
+      ],
+      "sfx": ["雨落伞面声", "雨落石阶声"],
+      "bgm": "古琴转为琵琶轮指，节奏渐紧",
+      "transition_out": "dissolve"
+    },
+    {
+      "id": "S005",
+      "act": "第二幕·竹伞",
+      "scene": "江边·双人中景",
+      "duration_sec": 9.0,
+      "shot_size": "中景",
+      "camera_move": "缓慢上升",
+      "description": "沈砚不知何时已上岸，站在阿箬侧后方。两人之间隔着一柄断伞的距离，谁都没看谁。",
+      "characters": ["C01", "C02"],
+      "image_prompt": "新国风水墨工笔，中景双人，左侧青年男子靛青短褐蓑衣持竹篙，右侧少女月白襦裙朱砂发带持断骨油纸伞，二人相隔约两步距离且互不对视，中间是雨中石阶与淡墨江面，构图疏离，宣纸纹理",
+      "video_prompt": "镜头极缓上升，雨丝持续，两人衣物随风飘动但身体几乎不动，人物间距与相对位置保持不变，无换脸，无多余人物进入画面",
+      "dialogue": [
+        { "character": "C01", "text": "伞撑不起来，可以不走。", "start_sec": 2.0, "emotion": "依旧平，但语速慢半拍" }
+      ],
+      "sfx": ["雨声", "江水拍岸"],
+      "bgm": "琵琶轮指达情绪高点，音量 -14dB",
+      "transition_out": "cut"
+    },
+    {
+      "id": "S006",
+      "act": "第二幕·竹伞",
+      "scene": "阿箬脸部特写",
+      "duration_sec": 6.0,
+      "shot_size": "大特写",
+      "camera_move": "固定",
+      "description": "阿箬的眼睛，雨水顺着睫毛滑下，分不清是雨还是别的。画面只有一个眼神的变化。",
+      "characters": ["C02"],
+      "image_prompt": "新国风水墨工笔，大特写，少女的眼睛与眼下小痣，睫毛挂着水珠，发带朱砂色虚化在画面上缘，眼中有微光反射，皮肤质感柔和不着重写实毛孔，背景完全虚化淡墨，宣纸纹理",
+      "video_prompt": "固定机位，仅眼睫轻眨一次，水珠沿脸颊缓慢滑落，瞳孔微缩，画面极稳无闪烁，面部结构不得形变",
+      "dialogue": [],
+      "sfx": ["雨声放大", "呼吸声（极轻）"],
+      "bgm": "琵琶收，古琴单音回归",
+      "transition_out": "flash_cut"
+    },
+    {
+      "id": "S007",
+      "act": "第三幕·归渡",
+      "scene": "渡船·全景",
+      "duration_sec": 10.0,
+      "shot_size": "全景",
+      "camera_move": "后拉远离",
+      "description": "船已离岸。船头只有沈砚一人撑篙，船尾空着，石阶上那柄断伞留在原处。画面逐渐后拉，渡口变小。",
+      "characters": ["C01"],
+      "image_prompt": "新国风水墨画，全景，乌篷渡船离岸行于江心，船头仅一人撑篙靛青短褐，船尾空无一人，岸边石阶上留一柄朱砂断伞，远山墨色渐淡，江面大面积留白，画面萧疏，宣纸纹理",
+      "video_prompt": "镜头缓慢后拉远离，船身轻微起伏，竹篙入水划出涟漪，雾气从画面左右缓缓涌入逐渐遮蔽远景，画面整体由清晰转向朦胧",
+      "dialogue": [],
+      "sfx": ["划水声渐远", "水声", "风过芦苇"],
+      "bgm": "古琴主题再现，音量渐弱至 -26dB",
+      "transition_out": "fade"
+    },
+    {
+      "id": "S008",
+      "act": "第三幕·归渡",
+      "scene": "空镜·伞",
+      "duration_sec": 9.0,
+      "shot_size": "特写",
+      "camera_move": "固定",
+      "description": "留在石阶上的断伞被雨打得微微颤动，最后一片伞面落下。黑场。片名浮出。",
+      "characters": [],
+      "image_prompt": "新国风水墨工笔，特写，一柄朱砂色断骨油纸伞斜置于湿石阶上，伞面残破，雨珠沿伞骨滴落，背景为极淡的墨色江雾，画面萧索留白多，宣纸纹理与湿痕",
+      "video_prompt": "固定机位，雨珠持续沿伞骨滴落，最后一片伞面缓慢脱落下坠，然后画面缓慢淡出为黑场，全程无镜头移动",
+      "dialogue": [],
+      "sfx": ["雨滴石阶", "纸面脱落声"],
+      "bgm": "古琴单音最后一个泛音，随黑场消失",
+      "transition_out": "fade_to_black",
+      "post_overlay": {
+        "type": "title_card",
+        "text": "青竹渡",
+        "subtext": "水墨仙侠短片",
+        "font": "assets/fonts/SourceHanSerifSC-Heavy.otf",
+        "start_sec": 7.0,
+        "duration_sec": 2.0
+      }
+    }
+  ],
+
+  "audio": {
+    "voiceover": {
+      "engine": "edge-tts",
+      "output_dir": "05_audio/voice",
+      "format": "mp3",
+      "sample_rate": 24000,
+      "loudness_target_lufs": -16,
+      "note": "配音生成后需人工试听，检查多音字、断句、语气是否贴合人设"
+    },
+    "bgm": {
+      "file": "05_audio/bgm/guzheng_main.mp3",
+      "license": "必须为已授权曲库或自有版权，禁止使用商业歌曲",
+      "base_volume_db": -22,
+      "ducking_db": -8,
+      "ducking_on_dialogue": true,
+      "fade_in_sec": 2.0,
+      "fade_out_sec": 3.0
+    },
+    "sfx_dir": "05_audio/sfx",
+    "master": {
+      "loudness_target_lufs": -14,
+      "true_peak_db": -1.0,
+      "note": "成片母版响度按平台要求调整；国内短视频平台一般 -14 LUFS 左右"
+    }
+  },
+
+  "subtitle": {
+    "enabled": true,
+    "style": {
+      "font_name": "Noto Sans CJK SC",
+      "font_candidates": [
+        "Noto Sans CJK SC",
+        "Source Han Sans SC",
+        "Microsoft YaHei",
+        "SimHei",
+        "PingFang SC",
+        "WenQuanYi Zen Hei"
+      ],
+      "font_size": 26,
+      "primary_color": "FFFFFF",
+      "outline_color": "1B2A33",
+      "outline_width": 2,
+      "shadow": 1,
+      "margin_v": 48,
+      "alignment": 2
+    },
+    "max_chars_per_line": 16,
+    "max_lines": 2,
+    "min_duration_sec": 1.0,
+    "note": "字幕必须与配音实际波形对齐，建议用 faster-whisper 识别后再人工校对；font_name 不存在时脚本会自动按 font_candidates 回退，避免字幕渲染成方框"
+  },
+
+  "output": {
+    "dir": "06_final",
+    "filename": "qingzhu_du_short_v1.mp4",
+    "codec": "libx264",
+    "crf": 18,
+    "preset": "slow",
+    "pix_fmt": "yuv420p",
+    "audio_codec": "aac",
+    "audio_bitrate": "192k",
+    "movflags": "+faststart"
+  },
+
+  "compliance": {
+    "checklist": [
+      "所有生成素材的平台条款已核对（商用权限）",
+      "无真人明星肖像、无未授权 IP 角色形象",
+      "BGM 为已授权曲库或自有版权",
+      "配音为平台音色或已获授权的声音克隆",
+      "涉及中国地图的画面使用合规地图数据，中国香港/中国台湾/中国澳门标注符合国家标准",
+      "台词无错别字、无事实性错误（已逐句校对）"
+    ]
+  }
+}
