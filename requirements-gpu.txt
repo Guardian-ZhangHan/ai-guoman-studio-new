@@ -1,0 +1,57 @@
+# ============================================================
+# 可选：本地扩散模型依赖（只有本地出图/出视频才需要）
+#
+# ⚠️ 重要提醒：
+#   本地视频生成对显存要求极高：
+#     - 文生图 SDXL / Flux：建议 >= 8GB 显存
+#     - 图生视频 SVD / AnimateDiff：建议 >= 16GB，长时段 >= 24GB
+#   显存不足时，推荐走云端平台生成，本仓库负责提示词与后期组装。
+#
+# 安装前先确认 CUDA 版本：
+#   nvidia-smi                     查看驱动支持的 CUDA 版本
+#   python -c "import torch; print(torch.cuda.is_available())"
+#
+# PyTorch 官方安装命令按 CUDA 版本选取：
+#   https://pytorch.org/get-started/locally/
+# ============================================================
+
+# ---------- 深度学习框架 ----------
+# 注意：不要直接 pip install torch，按 CUDA 版本从官方源装，例如：
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+torch>=2.3.0
+torchvision>=0.18.0
+accelerate>=0.31
+safetensors>=0.4.3
+
+# ---------- 图像生成 ----------
+diffusers>=0.29.0
+transformers>=4.42.0
+# 国漫风格常用：SDXL / Flux 底模 + 国风 LoRA
+# LoRA 文件放 03_character/loras/，不要提交进 Git（体积大）
+
+# ---------- 图生视频 ----------
+# 按选定方案二选一或都装
+# diffusers 内置 Stable Video Diffusion：
+#   from diffusers import StableVideoDiffusionPipeline
+# AnimateDiff（需额外装 motion module，走 ComfyUI 更省心）：
+# animatediff 官方无 pip 包，建议直接用 ComfyUI 工作流
+
+# ---------- ComfyUI 生态（本地生图生视频中枢） ----------
+# ComfyUI 本体用 git clone（见 copilot-setup-steps.yml），此处为其 Python 依赖
+xformers>=0.0.27          # 注意力加速 + 省显存（Windows 需匹配版本，装不上可跳过）
+safetensors>=0.4.3
+av>=12.0                   # 音视频容器读写
+imageio>=2.34
+# 角色一致性（IP-Adapter / PuLID / InstantID）
+insightface>=0.7          # 人脸编码（IP-Adapter / PuLID 需要）
+onnxruntime>=1.18         # InsightFace 推理后端
+# 对口型 / 肖像驱动（MuseTalk / EchoMimic / LivePortrait）各自 git clone + 装 requirements
+#   ，见 copilot-setup-steps.yml 的引擎安装步骤
+
+# ---------- 显存优化（小显存必备） ----------
+bitsandbytes>=0.43        # 8bit / 4bit 量化
+
+# ---------- ComfyUI 客户端（可选） ----------
+# 若本机跑 ComfyUI，用 API 方式驱动，比在 Python 里搭 pipeline 更灵活
+websocket-client>=1.7
+requests>=2.32
