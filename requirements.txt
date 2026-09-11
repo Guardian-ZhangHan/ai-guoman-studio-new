@@ -1,0 +1,51 @@
+# ============================================================
+# AI 国漫短片 / 微电影 - 核心依赖（轻量，必装）
+#
+# 安装：python -m pip install --upgrade pip && pip install -r requirements.txt
+# 校验：python scripts/test_check.py
+#
+# 设计原则：核心依赖只装「剪辑 + 音频 + 字幕 + 图片」这四件事，
+#   不装 torch/diffusers —— 视频生成交给云端平台，本地只做组装。
+#   这样做的好处：环境 2 分钟装完，CI 沙箱跑得动，不会卡在 CUDA 版本地狱。
+#   需要本地跑扩散模型再装 requirements-gpu.txt。
+# ============================================================
+
+# ---------- 视频处理 ----------
+imageio-ffmpeg>=0.5.1     # 自带 ffmpeg 二进制，免手动配置环境变量
+moviepy>=1.0.3            # 剪辑、拼接、转场
+ffmpeg-python>=0.2.0      # 直接构造 ffmpeg 滤镜图（比 moviepy 更可控）
+
+# ---------- 图像处理 ----------
+Pillow>=10.3              # 水印、拼图预演、尺寸统一、格式转换
+numpy>=1.26,<3            # moviepy 依赖，且做音频/图像数组运算
+
+# ---------- 音频处理 ----------
+pydub>=0.25.1             # 音频拼接、淡入淡出、增益
+                              # 注意：pydub 需要系统 ffmpeg（imageio-ffmpeg 已提供）
+
+# ---------- 中文配音（免费，无需 API Key） ----------
+edge-tts>=6.1.10          # 微软 Edge 神经语音，中文音色质量高且免费
+
+# ---------- 字幕对齐（可选但强烈推荐） ----------
+faster-whisper>=1.0.3     # 本地语音识别，用实际音频对齐字幕时间轴
+
+# ---------- 配置与工具 ----------
+pyyaml>=6.0               # 读 YAML 配置
+tqdm>=4.66                # 批量任务进度
+rich>=13.7                # 终端友好输出
+
+# ---------- 生成引擎客户端（驱动 ComfyUI / 云端 API） ----------
+websocket-client>=1.7      # ComfyUI WebSocket 推送任务
+requests>=2.32             # REST API（可灵/即梦/HunyuanVideo 等平台）
+opencv-python>=4.9         # 帧读取、人脸关键点、分镜预检
+av>=12.0                   # 音视频容器读写（demucs/audiocraft 依赖）
+
+# ---------- 后期增强（超分 / 人脸修复，运行时需 GPU） ----------
+realesrgan>=0.3           # 视频 / 图超分
+basicsr>=1.4               # realesrgan 依赖
+gfpgan>=1.3                # 人脸修复
+facexlib>=0.3              # gfpgan 依赖
+
+# ---------- BGM / 音效生成 ----------
+audiocraft>=1.2            # MusicGen 背景乐生成
+demucs>=4.0                # 人声 / 伴奏分离（垫乐闪避预处理）
