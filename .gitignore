@@ -1,0 +1,86 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# ---------- 镜头素材与成片（体积大，绝不入库） ----------
+04_shots/*
+!04_shots/.gitkeep
+!04_shots/_README.txt
+06_final/*
+!06_final/.gitkeep
+!06_final/_README.txt
+
+# ---------- 音频素材 ----------
+05_audio/voice/*
+!05_audio/voice/.gitkeep
+!05_audio/voice/_README.txt
+05_audio/bgm/*
+!05_audio/bgm/.gitkeep
+!05_audio/bgm/_README.txt
+05_audio/sfx/*
+!05_audio/sfx/.gitkeep
+!05_audio/sfx/_README.txt
+*.mp3
+*.wav
+*.flac
+*.m4a
+
+# ---------- 模型权重（LoRA / 底模，动辄几 GB） ----------
+03_character/loras/*
+!03_character/loras/.gitkeep
+!03_character/loras/_README.txt
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.gguf
+
+# ---------- 字体（有版权，且体积不小） ----------
+assets/fonts/*
+!assets/fonts/.gitkeep
+!assets/fonts/_README.txt
+*.ttf
+*.otf
+*.ttc
+*.woff
+*.woff2
+
+# ---------- 视频大文件 ----------
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+
+# ---------- 提示词与分镜是「资产」，必须入库（下面的否定规则不可删） ----------
+!02_storyboard/**/*.md
+!02_storyboard/**/*.csv
+!02_storyboard/**/*.txt
+!05_audio/subtitles.srt
+!05_audio/voiceover.csv
+
+# ---------- 临时文件 ----------
+*.log
+tmp/
+scratch/
+*.tmp
+06_final/concat_list.txt
+
+# ---------- 密钥与环境变量 ----------
+.env
+.env.*
+*.key
+credentials.json
+*api_key*
+*token*
+
+# ---------- 编辑器 / 系统 ----------
+.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
