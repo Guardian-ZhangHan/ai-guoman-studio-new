@@ -1,0 +1,8 @@
+file 'C:/Users/zhl18/WorkBuddy/2026-09-11-09-17-52/outputs/ai-guoman-studio/04_shots/S001.mp4'
+file 'C:/Users/zhl18/WorkBuddy/2026-09-11-09-17-52/outputs/ai-guoman-studio/04_shots/S002.mp4'
+file 'C:/Users/zhl18/WorkBuddy/2026-09-11-09-17-52/outputs/ai-guoman-studio/04_shots/S003.mp4'
+file 'C:/Users/zhl18/WorkBuddy/2026-09-11-09-17-52/outputs/ai-guoman-studio/04_shots/S004.mp4'
+file 'C:/Users/zhl18/WorkBuddy/2026-09-11-09-17-52/outputs/ai-guoman-studio/04_shots/S005.mp4'
+file 'C:/Users/zhl18/WorkBuddy/2026-09-11-09-17-52/outputs/ai-guoman-studio/04_shots/S006.mp4'
+file 'C:/Users/zhl18/WorkBuddy/2026-09-11-09-17-52/outputs/ai-guoman-studio/04_shots/S007.mp4'
+file 'C:/Users/zhl18/WorkBuddy/2026-09-11-09-17-52/outputs/ai-guoman-studio/04_shots/S008.mp4'
