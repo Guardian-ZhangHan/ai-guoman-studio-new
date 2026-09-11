@@ -1,0 +1,92 @@
+# ==============================================================================
+# .github/copilot-setup-steps.yml
+#
+# 作用：告诉 GitHub Copilot Coding Agent 如何搭好本短片工作室的运行环境。
+#       装 ffmpeg、装中文字体、装 Python 依赖、跑校验。
+#
+# 为什么短片仓库也需要这个：
+#   Agent 要在沙箱里跑 build_shotlist.py / compose_video.py。
+#   没有 ffmpeg 和中文字体，它要么装不上依赖，要么生成的字幕全是方框，
+#   最后交给你一个「看起来能跑、实际出不了片」的脚本。
+# ==============================================================================
+
+steps:
+  # ---------- 1. 拉取代码 ----------
+  - name: Checkout repository
+    uses: actions/checkout@v4
+
+  # ---------- 2. 准备 Python ----------
+  - name: Setup Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: "3.11"
+      cache: pip
+
+  # ---------- 3. 安装 FFmpeg（视频合成的地基） ----------
+  - name: Install FFmpeg
+    run: |
+      sudo apt-get update
+      sudo apt-get install -y --no-install-recommends \
+        ffmpeg \
+        libavcodec-extra \
+        libavformat-dev \
+        libswscale-dev
+      ffmpeg -version | head -n 1
+      ffprobe -version | head -n 1
+
+  # ---------- 4. 安装中文字体（字幕、水印必需） ----------
+  # 没有这一步，字幕会渲染成方框（豆腐块），而脚本本身不会报错 ——
+  # 这是 AI 短片流水线最隐蔽的坑之一。
+  - name: Install Chinese fonts
+    run: |
+      sudo apt-get install -y --no-install-recommends \
+        fonts-noto-cjk \
+        fonts-noto-cjk-extra \
+        fonts-wqy-zenhei \
+        fonts-wqy-microhei
+      fc-cache -fv
+      fc-list :lang=zh | head -n 5
+      echo "已安装中文字体数量: $(fc-list :lang=zh | wc -l)"
+
+  # ---------- 5. 安装 Python 依赖 ----------
+  - name: Install Python dependencies
+    run: |
+      python -m pip install --upgrade pip setuptools wheel
+      pip install -r requirements.txt
+
+  # ---------- 8. 生成引擎安装（重，best-effort，失败不阻断核心流程） ----------
+  # 本地出片才需要；纯云端生成路线可跳过本步。
+  # 引擎本体以 git clone 方式落地到 engines/，权重（GB 级）按需手动拉取。
+  - name: Install generation engines (best-effort)
+    if: false   # 默认关闭，避免 CI 超时；本地/有 GPU 时改为 true 或手动执行
+    run: |
+      set -e
+      mkdir -p engines && cd engines
+      git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git
+      git clone --depth 1 https://github.com/FunAudioLLM/CosyVoice.git
+      git clone --depth 1 https://github.com/RVC-Boss/GPT-SoVITS.git
+      git clone --depth 1 https://github.com/TMElyralab/MuseTalk.git
+      git clone --depth 1 https://github.com/KwaiVGI/LivePortrait.git
+      git clone --depth 1 https://github.com/antgroup/echomimic.git
+      git clone --depth 1 https://github.com/sczhou/CodeFormer.git
+      git clone --depth 1 https://github.com/hzwer/ECCV2022-RIFE.git
+      echo "引擎仓库已克隆。按需拉取模型权重（GB 级，示例）："
+      echo "  huggingface-cli download Wan-AI/Wan2.2-T2V-A14B --local-dir engines/ComfyUI/models/diffusion_models/wan22"
+      echo "  huggingface-cli download Tencent/HunyuanVideo --local-dir engines/ComfyUI/models/diffusion_models/hunyuan"
+      echo "  huggingface-cli download Lightricks/LTX-Video --local-dir engines/ComfyUI/models/diffusion_models/ltx"
+      echo "云端路线（无显卡推荐）：可灵/Kling、即梦/Jimeng、海螺/Hailuo、通义万相 的 API 由 scripts/gen_*.py 调用"
+
+  # ---------- 6. 环境自检 ----------
+  # 校验 ffmpeg 可用、中文字体存在、依赖齐备、目录结构完整。
+  # 校验不通过则任务判失败，Agent 必须先修环境再写业务代码。
+  - name: Run environment self-check
+    run: |
+      python -c "import sys; print('Python', sys.version)"
+      python scripts/test_check.py
+
+  # ---------- 7. 流水线冒烟测试 ----------
+  # 用演示项目跑一遍分镜生成，确认脚本链路可用
+  - name: Pipeline smoke test
+    run: |
+      python scripts/build_shotlist.py --config configs/demo_short.json
+      python scripts/compose_video.py --project configs/demo_short.json --dry-run
