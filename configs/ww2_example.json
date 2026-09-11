@@ -1,0 +1,259 @@
+{
+  "project": {
+    "title": "无名高地",
+    "subtitle": "二战题材短片 · 东线严冬",
+    "type": "short_film",
+    "logline": "1944 年冬，一名老兵和一名卫生员在被遗忘的高地上等一支不会来的补给队，他们用一封永远寄不出的信熬过最后一夜。",
+    "duration_target_sec": 40,
+    "aspect_ratio": "16:9",
+    "resolution": "1920x1080",
+    "fps": 24,
+    "language": "zh-CN",
+    "act_structure": [
+      { "act": "第一幕·黎明", "shots": ["S001", "S002"], "emotion_curve": "冷→凝" },
+      { "act": "第二幕·战壕", "shots": ["S003", "S004", "S005"], "emotion_curve": "凝→动" },
+      { "act": "第三幕·黄昏", "shots": ["S006"], "emotion_curve": "动→寂" }
+    ]
+  },
+
+  "style_bible": {
+    "art_style": "1940s 战地纪实胶片：Kodachrome 偏色 + 新闻片颗粒 + 轻度光晕，阴天漫射光，泥泞与锈蚀质感",
+    "reference_direction": "参考《我们的父辈》《兄弟连》的影像语言，重人与环境的真实疲惫感，不美化、不浪漫化战争",
+    "palette": [
+      { "hex": "#3B4332", "name": "军绿灰", "usage": "制服、帐篷、远景雪林" },
+      { "hex": "#6B5B43", "name": "泥褐", "usage": "战壕、冻土、装备" },
+      { "hex": "#C9D2D6", "name": "冬雾白", "usage": "雪、哈气、远景" },
+      { "hex": "#B5652E", "name": "夕照橙", "usage": "黄昏天光点缀，max_coverage: 0.12" }
+    ],
+    "lighting": "阴天漫射为主，探照灯/火光逆光，避免干净棚拍光",
+    "camera_language": "手持微抖、战地跟拍、低机位；情绪高点才用缓推",
+    "lens": "35mm 等效为主，特写 85mm",
+    "texture": "胶片颗粒 + 轻度光晕，雪面细节真实",
+    "motion_intensity": "低：AI 视频易抽搐，单镜位移不超过画面 8%",
+    "negative_prompt": "现代建筑, 智能手机, 明亮棚光, 塑料质感, 过度美颜, 平滑皮肤, 霓虹, 多余手指, 五官错位, 文字水印, 纳粹装饰美化, 浪漫化战争",
+    "consistency_requirements": {
+      "character_anchor_required": true,
+      "style_prefix_required": true,
+      "seed_lock_scope": "per_character"
+    }
+  },
+
+  "characters": [
+    {
+      "id": "C01",
+      "name": "老周",
+      "role": "主角·老兵",
+      "age_look": "三十余",
+      "appearance_anchors": {
+        "hair": "乱短发结霜，无帽檐破军帽",
+        "face": "胡茬，脸颊冻红，左颊旧疤",
+        "clothing": "军绿棉衣磨破，缠旧围巾",
+        "signature_prop": "一支卷刃的工兵铲",
+        "forbidden": "不得出现金饰、鲜明色彩、干净新制服"
+      },
+      "consistency": {
+        "seed": 481001,
+        "reference_image": "03_character/C01_ref.png",
+        "lora_path": "03_character/loras/laozhou_v1.safetensors",
+        "lora_weight": 0.78,
+        "ip_adapter_weight": 0.65,
+        "lock_appearance": true
+      },
+      "voice": {
+        "tts_voice": "zh-CN-YunyangNeural",
+        "rate": "-6%",
+        "pitch": "-4Hz",
+        "persona": "低哑、短句、尾音沉"
+      }
+    },
+    {
+      "id": "C02",
+      "name": "林晚",
+      "role": "卫生员",
+      "age_look": "二十许",
+      "appearance_anchors": {
+        "hair": "短发塞进棉帽，一缕碎发垂耳侧",
+        "face": "苍白，鼻尖冻红",
+        "clothing": "军绿棉衣外加白布伪装披风",
+        "signature_prop": "一只掉漆的红十字药箱",
+        "forbidden": "不得出现鲜艳口红、长发披散"
+      },
+      "consistency": {
+        "seed": 481002,
+        "reference_image": "03_character/C02_ref.png",
+        "lora_path": "03_character/loras/linwan_v1.safetensors",
+        "lora_weight": 0.78,
+        "ip_adapter_weight": 0.65,
+        "lock_appearance": true
+      },
+      "voice": {
+        "tts_voice": "zh-CN-XiaoxiaoNeural",
+        "rate": "-2%",
+        "pitch": "+2Hz",
+        "persona": "轻但稳，压着情绪"
+      }
+    }
+  ],
+
+  "shots": [
+    {
+      "id": "S001",
+      "act": "第一幕·黎明",
+      "scene": "无名高地·黎明",
+      "duration_sec": 7.0,
+      "shot_size": "大远景",
+      "camera_move": "极缓横移",
+      "description": "雪覆的战壕蜿蜒如伤疤，远处雪林灰白，一名士兵的剪影伫立在壕沿。",
+      "characters": ["C01"],
+      "image_prompt": "1940s 战地纪实胶片，大远景，冬晨雪覆战壕蜿蜒于冻土山坡，远处雪林灰白，一名裹旧围巾的士兵剪影立于壕沿，阴天漫射光，军绿灰与泥褐为主，冬雾白远景，胶片颗粒，无面部特写",
+      "video_prompt": "镜头极缓横移，雪沫被风轻卷，士兵几乎不动仅肩头微起伏，哈气成雾，画面稳定无抖动",
+      "dialogue": [],
+      "sfx": ["风声", "远处闷炮（极远）"],
+      "bgm": "低沉弦乐长音，音量 -24dB",
+      "transition_out": "fade"
+    },
+    {
+      "id": "S002",
+      "act": "第一幕·黎明",
+      "scene": "战壕内·中景",
+      "duration_sec": 6.0,
+      "shot_size": "中景",
+      "camera_move": "固定",
+      "description": "老周蹲在战壕里，用冻僵的手搓着火柴，火苗三闪灭了。他盯着火柴盒上的字。",
+      "characters": ["C01"],
+      "image_prompt": "1940s 战地纪实胶片，中景，老兵蹲于泥褐战壕内，双手冻红搓火柴，火苗微亮映亮胡茬与左颊旧疤，军绿破棉衣，背景虚化雪雾，胶片颗粒与轻度光晕",
+      "video_prompt": "固定机位，火焰三闪即灭，人物呼吸轻微，手轻微颤抖，哈气上升，画面极稳",
+      "dialogue": [
+        { "character": "C01", "text": "补给队，今天也到不了。", "start_sec": 2.0, "emotion": "平淡，像说天气" }
+      ],
+      "sfx": ["火柴擦响", "风声"],
+      "bgm": "弦乐延续",
+      "transition_out": "cut"
+    },
+    {
+      "id": "S003",
+      "act": "第二幕·战壕",
+      "scene": "包扎点·特写",
+      "duration_sec": 6.0,
+      "shot_size": "特写",
+      "camera_move": "固定微晃",
+      "description": "林晚用牙咬开绷带，给一名昏迷伤员缠住渗血的腿。她的手很稳。",
+      "characters": ["C02"],
+      "image_prompt": "1940s 战地纪实胶片，特写，卫生员用牙咬开绷带为伤员包扎，苍白脸鼻尖冻红，军绿棉衣外白布伪装披风，掉漆红十字药箱入镜一角，胶片颗粒，真实皮肤质感不美颜",
+      "video_prompt": "固定微晃，手部动作稳定，绷带缓慢缠绕，伤员身体随呼吸轻起伏，画面无换脸无闪烁",
+      "dialogue": [],
+      "sfx": ["布料撕裂声", "风声"],
+      "bgm": "弦乐加入单簧管，哀而不伤",
+      "transition_out": "dissolve"
+    },
+    {
+      "id": "S004",
+      "act": "第二幕·战壕",
+      "scene": "壕沿·双人",
+      "duration_sec": 8.0,
+      "shot_size": "中景",
+      "camera_move": "缓慢上升",
+      "description": "老周把半块硬饼掰给林晚。两人都没看对方，望着同一个方向——南方。",
+      "characters": ["C01", "C02"],
+      "image_prompt": "1940s 战地纪实胶片，中景双人，老兵与卫生员并肩立于战壕沿，老兵递半块硬饼，二人同望南方雪雾，军绿与泥褐，冬雾白远景，疏离构图，胶片颗粒",
+      "video_prompt": "镜头缓升，雪沫飘过，二人衣物微动身体不动，相对位置稳定无换脸，南方雾气缓缓漫入",
+      "dialogue": [
+        { "character": "C02", "text": "你那封信，写完了吗？", "start_sec": 2.5, "emotion": "轻，压着" }
+      ],
+      "sfx": ["风声", "衣物摩擦"],
+      "bgm": "单簧管渐弱",
+      "transition_out": "cut"
+    },
+    {
+      "id": "S005",
+      "act": "第二幕·战壕",
+      "scene": "信纸·大特写",
+      "duration_sec": 5.0,
+      "shot_size": "大特写",
+      "camera_move": "固定",
+      "description": "老周摊开一封写到一半的信，墨被雪水洇开。最后一个字是'家'。",
+      "characters": ["C01"],
+      "image_prompt": "1940s 战地纪实胶片，大特写，一只冻红的手摊开半封家信，墨迹被雪水洇开，末尾一字是家，纸面粗糙起毛，胶片颗粒与暖灯微光",
+      "video_prompt": "固定机位，雪水沿信纸边缘缓渗，字迹微晕开，手轻微颤动，画面极稳无闪烁",
+      "dialogue": [
+        { "character": "C01", "text": "写完了。寄不出的那种。", "start_sec": 1.5, "emotion": "极轻，几乎自语" }
+      ],
+      "sfx": ["纸声", "风声放大"],
+      "bgm": "弦乐单音回归，音量 -20dB",
+      "transition_out": "dissolve"
+    },
+    {
+      "id": "S006",
+      "act": "第三幕·黄昏",
+      "scene": "高地·全景",
+      "duration_sec": 8.0,
+      "shot_size": "全景",
+      "camera_move": "后拉远离",
+      "description": "夕照把雪染成一线橙。两个剪影仍坐在原地。镜头后拉，高地沉入暮色。",
+      "characters": ["C01", "C02"],
+      "image_prompt": "1940s 战地纪实胶片，全景，黄昏雪覆高地，夕照橙一线染雪缘，两个裹围巾与白披风的士兵剪影静坐战壕沿，远山灰白沉入暮色，萧索构图，胶片颗粒",
+      "video_prompt": "镜头缓慢后拉远离，夕照渐暗，雪面反光减弱，二人静止，雾气自画面两侧涌入遮蔽远景，画面由清晰转朦胧",
+      "dialogue": [],
+      "sfx": ["风声渐强", "远处闷炮"],
+      "bgm": "主题长音渐弱至 -26dB",
+      "transition_out": "fade_to_black",
+      "post_overlay": {
+        "type": "title_card",
+        "text": "无名高地",
+        "subtext": "谨以此片纪念无数无名者",
+        "font": "assets/fonts/SourceHanSerifSC-Heavy.otf",
+        "start_sec": 6.0,
+        "duration_sec": 2.0
+      }
+    }
+  ],
+
+  "audio": {
+    "voiceover": {
+      "engine": "edge-tts",
+      "note": "升级路径：用 voice-clone-tts 为每个角色建声纹档案（CosyVoice2/GPT-SoVITS/IndexTTS-2），替代通用音色",
+      "output_dir": "05_audio/voice",
+      "format": "mp3",
+      "sample_rate": 24000,
+      "loudness_target_lufs": -16
+    },
+    "bgm": {
+      "file": "05_audio/bgm/ww2_strings.mp3",
+      "license": "必须为已授权曲库或自有版权 / AI 可商用生成，禁止商业歌曲",
+      "base_volume_db": -22,
+      "ducking_db": -8,
+      "ducking_on_dialogue": true
+    },
+    "sfx_dir": "05_audio/sfx",
+    "master": { "loudness_target_lufs": -14, "true_peak_db": -1.0 }
+  },
+
+  "subtitle": {
+    "enabled": true,
+    "style": {
+      "font_name": "Noto Sans CJK SC",
+      "font_candidates": ["Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", "SimHei", "PingFang SC", "WenQuanYi Zen Hei"],
+      "font_size": 26, "primary_color": "FFFFFF", "outline_color": "1B2A33", "outline_width": 2, "shadow": 1, "margin_v": 48, "alignment": 2
+    },
+    "max_chars_per_line": 16, "max_lines": 2, "min_duration_sec": 1.0
+  },
+
+  "output": {
+    "dir": "06_final",
+    "filename": "ww2_wuming_gaodi_v1.mp4",
+    "codec": "libx264", "crf": 18, "preset": "slow", "pix_fmt": "yuv420p",
+    "audio_codec": "aac", "audio_bitrate": "192k", "movflags": "+faststart"
+  },
+
+  "compliance": {
+    "checklist": [
+      "不美化侵略与极端主义；本片为平民/士兵视角的人性叙事，非战争浪漫化",
+      "敏感符号（卐 等）仅可在批判/历史还原语境出现，本片未使用",
+      "制服/装备/番号已尽量考据，涉及真实历史须人工复核",
+      "所有生成素材平台条款已核对（商用权限）",
+      "BGM 为已授权曲库或自有版权 / AI 可商用生成",
+      "配音为平台音色或已获授权的声音克隆",
+      "台词无错别字、无事实性错误（已逐句校对）"
+    ]
+  }
+}
